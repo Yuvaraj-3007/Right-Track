@@ -255,7 +255,7 @@
     <!-- What is it -->
     <div class="section">
         <h2><span class="icon">&#128196;</span> What is a Ticket Management System?</h2>
-        <p class="section-desc">A centralized platform where employees raise IT issues, IT staff resolves them, and management tracks everything.</p>
+        <p class="section-desc">A centralized platform where employees raise issues, support staff resolves them, and management tracks everything.</p>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
             <div>
@@ -263,7 +263,7 @@
                 <div class="problem-grid" style="grid-template-columns: 1fr;">
                     <div class="problem-card">
                         <h4>Lost Requests</h4>
-                        <p>IT requests via email, phone, walk-ins get forgotten or misplaced</p>
+                        <p>requests via email, phone, walk-ins get forgotten or misplaced</p>
                     </div>
                     <div class="problem-card">
                         <h4>No Visibility</h4>
@@ -275,7 +275,7 @@
                     </div>
                     <div class="problem-card">
                         <h4>No Performance Data</h4>
-                        <p>Management cannot measure IT team efficiency or identify recurring issues</p>
+                        <p>Management cannot measure support team efficiency or identify recurring issues</p>
                     </div>
                 </div>
             </div>
@@ -313,14 +313,14 @@
                 <ul>
                     <li>Full system access</li>
                     <li>Manage users and roles</li>
-                    <li>Assign tickets to IT staff</li>
+                    <li>Assign tickets to support staff</li>
                     <li>View all tickets and reports</li>
                     <li>Close resolved tickets</li>
                     <li>System configuration</li>
                 </ul>
             </div>
             <div class="role-card staff">
-                <h3>IT Staff</h3>
+                <h3>Support Staff</h3>
                 <ul>
                     <li>View assigned + open tickets</li>
                     <li>Self-assign unassigned tickets</li>
@@ -360,7 +360,7 @@
             </div>
             <div class="tech-item">
                 <div class="tech-icon">&#128451;</div>
-                <div class="tech-name">PostgreSQL</div>
+                <div class="tech-name">PostgreSQL + Prisma</div>
                 <div class="tech-role">Database</div>
             </div>
             <div class="tech-item">
@@ -454,10 +454,10 @@
                 <tr><th>Current Status</th><th>Can Move To</th><th>Who Can Change</th></tr>
             </thead>
             <tbody>
-                <tr><td>Open</td><td>Assigned</td><td>Admin, IT Staff</td></tr>
-                <tr><td>Assigned</td><td>In Progress</td><td>Admin, IT Staff</td></tr>
-                <tr><td>In Progress</td><td>On Hold, Resolved</td><td>Admin, IT Staff</td></tr>
-                <tr><td>On Hold</td><td>In Progress</td><td>Admin, IT Staff</td></tr>
+                <tr><td>Open</td><td>Assigned</td><td>Admin, Support Staff</td></tr>
+                <tr><td>Assigned</td><td>In Progress</td><td>Admin, Support Staff</td></tr>
+                <tr><td>In Progress</td><td>On Hold, Resolved</td><td>Admin, Support Staff</td></tr>
+                <tr><td>On Hold</td><td>In Progress</td><td>Admin, Support Staff</td></tr>
                 <tr><td>Resolved</td><td>Closed or Reopen</td><td>Admin (close), Employee (reopen)</td></tr>
                 <tr><td>Closed</td><td>-- (Terminal)</td><td>No further changes</td></tr>
             </tbody>
@@ -509,7 +509,7 @@
                         <div class="mock-login">
                             <div class="mock-login-card">
                                 <h3>Right Tracker</h3>
-                                <p class="tagline">IT Ticket Management System</p>
+                                <p class="tagline">Ticket Management System</p>
                                 <div class="mock-input">admin@righttracker.com</div>
                                 <div class="mock-input">*************</div>
                                 <div class="mock-btn">Sign In</div>
@@ -629,7 +629,7 @@
                                 <p style="margin-top:10px; color:#666; font-size:0.8rem;">My laptop won't power on. I've tried holding the power button for 30 seconds. The charging light is on but nothing happens on screen.</p>
                             </div>
                             <div class="mock-actions">
-                                <h5>Actions (IT Staff / Admin)</h5>
+                                <h5>Actions (Support Staff / Admin)</h5>
                                 <div style="display:flex;gap:8px;margin-bottom:10px;">
                                     <select class="mock-select"><option>Assign to...</option><option>John Tech</option><option>Jane Tech</option></select>
                                     <button class="mock-action-btn">Assign</button>
@@ -817,7 +817,7 @@
             </div>
             <div style="background:#FFF5F0;border-left:4px solid #E86425;padding:20px;border-radius:8px;">
                 <h4 style="color:#D45A1F;margin-bottom:6px;">Data Protection</h4>
-                <p style="color:#666;font-size:0.9rem;">No plain-text passwords, SQL injection prevention (ORM), input validation, environment-based secrets</p>
+                <p style="color:#666;font-size:0.9rem;">No plain-text passwords, SQL injection prevention (Prisma ORM), input validation, environment-based secrets</p>
             </div>
             <div style="background:#FFF5F0;border-left:4px solid #E86425;padding:20px;border-radius:8px;">
                 <h4 style="color:#D45A1F;margin-bottom:6px;">Infrastructure</h4>

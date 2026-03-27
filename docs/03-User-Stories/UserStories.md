@@ -1,6 +1,6 @@
 # User Stories — Right Tracker
 
-## IT Office Ticket Management System
+## Ticket Management System
 
 | Field            | Detail                          |
 | ---------------- | ------------------------------- |
@@ -38,7 +38,7 @@
 ### US-101: User Registration
 **As an** admin,
 **I want to** register new users into the system,
-**So that** employees and IT staff can access the platform.
+**So that** employees and support staff can access the platform.
 
 **Acceptance Criteria:**
 - Admin can create a user with name, email, department, and role
@@ -136,7 +136,7 @@
 ### US-201: Create Ticket
 **As an** employee,
 **I want to** create a support ticket,
-**So that** IT can be aware of and resolve my issue.
+**So that** the support team can be aware of and resolve my issue.
 
 **Acceptance Criteria:**
 - Employee fills in title, description, category, and priority
@@ -146,7 +146,7 @@
 - SLA deadline is auto-calculated based on priority
 - Confirmation message is shown after creation
 - Employee is redirected to the ticket list
-- Only employees and admin can create tickets. IT Staff cannot create tickets.
+- Only employees and admin can create tickets. Support Staff cannot create tickets.
 
 **Priority:** P0 | **Points:** 5
 
@@ -159,7 +159,7 @@
 
 **Acceptance Criteria:**
 - Employee sees only their own tickets
-- IT Staff sees their assigned tickets + open/unassigned tickets
+- Support Staff sees their assigned tickets + open/unassigned tickets
 - Admin sees all tickets
 - List shows: ticket no, title, status, priority, category, date, assigned to
 - Tickets are sorted by created date (newest first)
@@ -188,13 +188,13 @@
 ---
 
 ### US-204: Assign Ticket
-**As an** admin or IT staff,
-**I want to** assign a ticket to an IT technician,
+**As an** admin or support staff,
+**I want to** assign a ticket to a technician,
 **So that** the right person handles the issue.
 
 **Acceptance Criteria:**
-- Admin can assign any ticket to any IT staff member
-- IT Staff can self-assign unassigned tickets only (cannot assign to other staff members). Admin can assign any ticket to any staff member.
+- Admin can assign any ticket to any support staff member
+- Support Staff can self-assign unassigned tickets only (cannot assign to other staff members). Admin can assign any ticket to any staff member.
 - Ticket status automatically changes to "assigned" when assigned from "open"
 - Assigned staff member receives a notification (full version)
 - Reassignment is allowed (with notification to both old and new assignee in full version)
@@ -205,7 +205,7 @@
 ---
 
 ### US-205: Update Ticket Status
-**As an** IT staff member,
+**As an** support staff member,
 **I want to** update the status of a ticket,
 **So that** the employee knows the progress.
 
@@ -234,7 +234,7 @@
 **Acceptance Criteria:**
 - Employee can edit title, description, category, priority
 - Editing is allowed only when status is "open"
-- IT Staff and Admin can edit any ticket at any status
+- Support Staff and Admin can edit any ticket at any status
 - Changes are saved and the updated ticket is displayed
 
 **Priority:** P1 | **Points:** 3
@@ -300,7 +300,7 @@
 
 **Acceptance Criteria:**
 - Employee can comment on their own tickets
-- IT Staff can comment on their assigned tickets
+- Support Staff can comment on their assigned tickets
 - Admin can comment on any ticket
 - Comments show author name, role badge, and timestamp
 - Relevant parties are notified of new comments (full version)
@@ -311,12 +311,12 @@
 ---
 
 ### US-302: Add Internal Note
-**As an** IT staff member,
+**As an** support staff member,
 **I want to** add an internal note on a ticket,
 **So that** I can share technical details with other staff without the employee seeing it.
 
 **Acceptance Criteria:**
-- Internal notes are visible only to IT Staff and Admin
+- Internal notes are visible only to Support Staff and Admin
 - Notes are visually distinct from public comments (different color/badge)
 - Employee cannot see internal notes in any view
 - Notes show author name and timestamp
@@ -331,7 +331,7 @@
 ### US-401: Upload Attachment
 **As an** employee,
 **I want to** attach files to my ticket,
-**So that** IT staff can see screenshots or documents related to my issue.
+**So that** support staff can see screenshots or documents related to my issue.
 
 **Acceptance Criteria:**
 - Allowed during ticket creation and in comments
@@ -365,7 +365,7 @@
 ### US-501: Admin Dashboard
 **As an** admin,
 **I want to** see an overview of all tickets and staff performance,
-**So that** I can monitor IT operations.
+**So that** I can monitor operations.
 
 **Acceptance Criteria:**
 - Total tickets by status (cards with count)
@@ -380,8 +380,8 @@
 
 ---
 
-### US-502: IT Staff Dashboard
-**As an** IT staff member,
+### US-502: Support Staff Dashboard
+**As an** support staff member,
 **I want to** see my assigned tickets and performance,
 **So that** I can prioritize my work.
 
@@ -448,7 +448,7 @@
 ### US-701: Generate Reports
 **As an** admin,
 **I want to** generate reports on ticket data,
-**So that** I can analyze IT performance and present to management.
+**So that** I can analyze team performance and present to management.
 
 **Acceptance Criteria:**
 - Report types: by status, category, priority, staff member
@@ -560,7 +560,7 @@
 - Database credentials are in environment variables
 - .env files are excluded from version control (.gitignore)
 - Production errors do not expose stack traces or internal details
-- All database queries use parameterized queries (Sequelize ORM) to prevent SQL injection
+- All database queries use parameterized queries (Prisma ORM) to prevent SQL injection
 - File uploads validate MIME type and enforce size limits
 
 **Priority:** P0 | **Points:** 3
@@ -609,7 +609,7 @@ The POC will cover the following user stories (partially or fully):
 | US-205 | Update Ticket Status   | Full (with transition validation)            |
 | US-206 | Edit Ticket            | Full (PUT /tickets/:id for field updates)    |
 | US-501 | Admin Dashboard        | Partial (stats cards only, no charts)        |
-| US-502 | IT Staff Dashboard     | Partial (assigned + unassigned counts)       |
+| US-502 | Support Staff Dashboard     | Partial (assigned + unassigned counts)       |
 | US-503 | Employee Dashboard     | Partial (ticket list + create button)        |
 | US-901 | Secure Authentication  | Full (bcrypt + JWT + generic errors)     |
 | US-902 | API Security           | Full (Helmet + CORS + rate limiting)     |

@@ -1,8 +1,8 @@
 # Right Tracker
 
-**IT Office Ticket Management System**
+**Ticket Management System**
 
-A centralized platform for managing IT support tickets — employees raise issues, IT staff resolves them, admins oversee everything.
+A centralized platform for managing support tickets — employees raise issues, support staff resolves them, admins oversee everything.
 
 ---
 

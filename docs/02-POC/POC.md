@@ -1,6 +1,6 @@
 # Proof of Concept (POC)
 
-## Right Tracker — IT Office Ticket Management System
+## Right Tracker — Ticket Management System
 
 | Field            | Detail                          |
 | ---------------- | ------------------------------- |
@@ -24,7 +24,7 @@ Validate that the core ticket management workflow can be built using the chosen 
 |---|----------------------------------------------------------|------------------------------------------|
 | 1 | Can users register and log in with role-based access?    | JWT auth with 3 roles working            |
 | 2 | Can employees create and track tickets?                  | Ticket CRUD with status flow             |
-| 3 | Can IT staff be assigned tickets and update status?      | Assignment + status transitions working  |
+| 3 | Can support staff be assigned tickets and update status?      | Assignment + status transitions working  |
 | 4 | Can the system store and retrieve data from PostgreSQL?  | All CRUD operations hit the database     |
 | 5 | Does the React frontend communicate with the backend?    | API integration end-to-end               |
 | 6 | Does role-based access control work correctly?           | Unauthorized actions are blocked         |
@@ -37,7 +37,7 @@ Validate that the core ticket management workflow can be built using the chosen 
 
 #### Backend (Node.js + Express + PostgreSQL)
 - [ ] Project setup with Express.js
-- [ ] PostgreSQL connection with Sequelize ORM
+- [ ] PostgreSQL connection with Prisma ORM
 - [ ] User model (name, email, password, role, department, isActive)
 - [ ] Ticket model (ticketNo, title, description, category, priority, status, createdBy, assignedTo)
 - [ ] Auth APIs: Register, Login (JWT), Get Current User
@@ -70,7 +70,7 @@ Validate that the core ticket management workflow can be built using the chosen 
 #### Database (PostgreSQL)
 - [ ] Users table with indexes
 - [ ] Tickets table with foreign keys and indexes
-- [ ] Seed data: 1 admin, 2 IT staff, 3 employees, 5 sample tickets
+- [ ] Seed data: 1 admin, 2 support staff, 3 employees, 5 sample tickets
 
 ### 3.2 Out of Scope (NOT in POC)
 - Comments / internal notes
@@ -99,8 +99,12 @@ Validate that the core ticket management workflow can be built using the chosen 
 ### 4.1 Backend Structure
 ```
 server/
+├── prisma/
+│   ├── schema.prisma            # Database schema definition
+│   ├── migrations/              # Version-controlled migrations
+│   └── seed.ts                  # Seed data script
 ├── config/
-│   └── db.js                    # Sequelize instance + PostgreSQL connection
+│   └── db.js                    # Prisma client instance
 ├── controllers/
 │   ├── authController.js        # register, login, getMe
 │   ├── ticketController.js      # CRUD, assign, updateStatus
@@ -110,10 +114,6 @@ server/
 │   ├── role.js                  # Role authorization (authorize)
 │   ├── errorHandler.js          # Global error handler
 │   └── validate.js              # express-validator runner
-├── models/
-│   ├── index.js                 # Model registry + associations
-│   ├── User.js                  # User model definition
-│   └── Ticket.js                # Ticket model definition
 ├── routes/
 │   ├── authRoutes.js            # /api/auth/*
 │   ├── ticketRoutes.js          # /api/tickets/*
@@ -124,8 +124,6 @@ server/
 ├── utils/
 │   ├── AppError.js              # Custom error class
 │   └── generateTicketNo.js      # TKT-XXXX auto-generator
-├── seeders/
-│   └── seed.js                  # Sample data script
 ├── .env                         # Environment variables
 ├── .env.example                 # Template for .env
 ├── .gitignore                   # node_modules, .env
@@ -566,6 +564,8 @@ CREATE INDEX idx_tickets_assigned_to ON tickets(assigned_to);
 
 > **Note:** The POC uses VARCHAR for `role`, `category`, `priority`, and `status` fields for simplicity. The full build will use ENUM types or CHECK constraints for data integrity.
 
+> **Note:** The above SQL is for reference. In the actual implementation, the schema is defined in `prisma/schema.prisma` and tables are created via `npx prisma migrate dev`.
+
 ---
 
 ## 9. Seed Data
@@ -573,9 +573,9 @@ CREATE INDEX idx_tickets_assigned_to ON tickets(assigned_to);
 ### Users
 | Name             | Email                     | Role     | Password  | Department |
 | ---------------- | ------------------------- | -------- | --------- | ---------- |
-| Admin User       | admin@righttracker.com    | admin    | Admin@123 | IT         |
-| John Tech        | john@righttracker.com     | staff    | Staff@123 | IT         |
-| Jane Tech        | jane@righttracker.com     | staff    | Staff@123 | IT         |
+| Admin User       | admin@righttracker.com    | admin    | Admin@123 | Support    |
+| John Tech        | john@righttracker.com     | staff    | Staff@123 | Support    |
+| Jane Tech        | jane@righttracker.com     | staff    | Staff@123 | Support    |
 | Alice Employee   | alice@righttracker.com    | employee | User@123  | Marketing  |
 | Bob Employee     | bob@righttracker.com      | employee | User@123  | Finance    |
 | Charlie Employee | charlie@righttracker.com  | employee | User@123  | HR         |
@@ -611,8 +611,12 @@ cd server
 npm install
 # Copy .env.example to .env and update database credentials
 cp .env.example .env
-# Run seed script to create tables and sample data
-npm run seed
+# Generate Prisma client
+npx prisma generate
+# Run migrations
+npx prisma migrate dev
+# Seed the database
+npx prisma db seed
 # Start the development server
 npm run dev
 ```
@@ -649,7 +653,7 @@ cp .env.docker.example .env.docker
 docker compose up --build -d
 
 # 3. Seed the database with initial users and sample tickets
-docker compose exec server npm run seed
+docker compose exec server npx prisma db seed
 
 # 4. Open the application
 # http://localhost
@@ -816,10 +820,10 @@ CLIENT_URL=https://tracker.yourdomain.com
 After the first successful deployment, seed the database with initial data:
 
 - In Coolify, open the **"Terminal"** for the `server` service
-- Run: `npm run seed`
+- Run: `npx prisma db seed`
 - Alternatively, use Coolify's execute command feature:
   ```
-  docker compose exec server npm run seed
+  docker compose exec server npx prisma db seed
   ```
 
 ### Ongoing Operations

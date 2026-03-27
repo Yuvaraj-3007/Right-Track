@@ -1,6 +1,6 @@
 # Product Requirements Document (PRD)
 
-## Right Tracker — IT Office Ticket Management System
+## Right Tracker — Ticket Management System
 
 | Field              | Detail                            |
 | ------------------ | --------------------------------- |
@@ -8,8 +8,8 @@
 | **Version**        | 0.1                               |
 | **Date**           | 2026-03-27                        |
 | **Status**         | Draft                             |
-| **Author**         | IT Office Team                    |
-| **Document Owner** | IT Department                     |
+| **Author**         | Wisright Team                    |
+| **Document Owner** | Department                     |
 
 ---
 
@@ -17,26 +17,26 @@
 
 | Version | Date       | Author          | Description                                          | Status |
 | ------- | ---------- | --------------- | ---------------------------------------------------- | ------ |
-| 0.1     | 2026-03-27 | IT Office Team  | Initial draft — structure, scope, Docker/Coolify     | Draft  |
+| 0.1     | 2026-03-27 | Wisright Team  | Initial draft — structure, scope, Docker/Coolify     | Draft  |
 
 ---
 
 ## 1. Executive Summary
 
-Right Tracker is a web-based IT Office Ticket Management System designed to centralize, streamline, and bring accountability to internal IT support operations. The system replaces ad-hoc communication channels — such as email, phone calls, and verbal requests — with a structured ticketing workflow that provides real-time visibility for all stakeholders. Built on a modern stack of React.js, Node.js, and PostgreSQL, the platform supports role-based access for administrators, IT staff, and employees, with features including SLA tracking, automated notifications, and management reporting. The application is fully containerized with Docker and deployed via Coolify for production reliability. This document defines the product requirements for Version 1.0 and serves as the foundation for design, development, and acceptance testing.
+Right Tracker is a web-based Ticket Management System designed to centralize, streamline, and bring accountability to internal support operations. The system replaces ad-hoc communication channels — such as email, phone calls, and verbal requests — with a structured ticketing workflow that provides real-time visibility for all stakeholders. Built on a modern stack of React.js, Node.js, and PostgreSQL, the platform supports role-based access for administrators, support staff, and employees, with features including SLA tracking, automated notifications, and management reporting. The application is fully containerized with Docker and deployed via Coolify for production reliability. This document defines the product requirements for Version 1.0 and serves as the foundation for design, development, and acceptance testing.
 
 ---
 
 ## 2. Problem Statement
 
-The IT Office currently lacks a formal system for tracking support requests, leading to the following pain points:
+The Office currently lacks a formal system for tracking support requests, leading to the following pain points:
 
-- **No centralized request log.** IT requests arrive via email, phone, instant messages, and walk-ins, making it impossible to maintain a single source of truth.
+- **No centralized request log.** Support requests arrive via email, phone, instant messages, and walk-ins, making it impossible to maintain a single source of truth.
 - **Lost and forgotten requests.** Without a tracking mechanism, tickets are frequently misplaced, duplicated, or never addressed, resulting in frustrated employees and unresolved issues.
-- **No visibility or accountability.** Employees have no way to check the status of their requests, and management cannot measure IT staff workload or response times.
+- **No visibility or accountability.** Employees have no way to check the status of their requests, and management cannot measure support staff workload or response times.
 - **Inconsistent prioritization.** Without defined priority levels and SLA targets, critical issues compete with low-priority tasks on an ad-hoc basis.
-- **No performance data.** The absence of historical records prevents the IT Office from identifying recurring problems, measuring efficiency, or justifying resource allocation.
-- **Manual follow-ups consume time.** Both employees and IT staff spend significant effort on status inquiries that a self-service portal would eliminate.
+- **No performance data.** The absence of historical records prevents the Office from identifying recurring problems, measuring efficiency, or justifying resource allocation.
+- **Manual follow-ups consume time.** Both employees and support staff spend significant effort on status inquiries that a self-service portal would eliminate.
 
 Right Tracker addresses these issues by providing a transparent, auditable, and SLA-driven ticketing workflow accessible to every stakeholder in the organization.
 
@@ -46,10 +46,10 @@ Right Tracker addresses these issues by providing a transparent, auditable, and 
 
 | Role              | Name / Group        | Responsibility                                                    | Interest Level |
 | ----------------- | ------------------- | ----------------------------------------------------------------- | -------------- |
-| IT Manager        | TBD                 | Project sponsor; approves requirements, priorities, and go-live   | High           |
-| IT Staff          | IT Office Team      | Primary users; manage, resolve, and report on tickets             | High           |
+| Manager        | TBD                 | Project sponsor; approves requirements, priorities, and go-live   | High           |
+| Support Staff          | Wisright Team      | Primary users; manage, resolve, and report on tickets             | High           |
 | Department Heads  | All Departments     | Review departmental ticket volume and SLA compliance              | Medium         |
-| Employees         | All Staff           | End users; submit and track IT support requests                   | Medium         |
+| Employees         | All Staff           | End users; submit and track support requests                   | Medium         |
 | Project Developer | Development Team    | Design, build, test, and deploy the system                        | High           |
 | QA / Tester       | TBD                 | Validate requirements against acceptance criteria                 | Medium         |
 
@@ -57,16 +57,16 @@ Right Tracker addresses these issues by providing a transparent, auditable, and 
 
 ## 4. Overview
 
-Right Tracker is an internal IT Office Ticket Management System that allows employees to raise IT support tickets and enables IT staff to manage, assign, track, and resolve those tickets efficiently. The system aims to replace manual tracking (email, phone, verbal requests) with a centralized, transparent, and accountable workflow.
+Right Tracker is an internal Ticket Management System that allows employees to raise support tickets and enables support staff to manage, assign, track, and resolve those tickets efficiently. The system aims to replace manual tracking (email, phone, verbal requests) with a centralized, transparent, and accountable workflow.
 
 ---
 
 ## 5. Objectives
 
-- Provide a centralized platform for all IT support requests
+- Provide a centralized platform for all support requests
 - Improve ticket response and resolution time
 - Enable transparency — employees can track their ticket status in real time
-- Provide management with reports and analytics on IT performance
+- Provide management with reports and analytics on team performance
 - Reduce lost or forgotten requests
 - Establish accountability through audit trails and assignment tracking
 
@@ -78,7 +78,7 @@ Right Tracker is an internal IT Office Ticket Management System that allows empl
 | ------------ | ----------------------- |
 | Frontend     | React.js (Vite)         |
 | Backend      | Node.js (Express.js)    |
-| Database     | PostgreSQL (Sequelize)   |
+| Database     | PostgreSQL (Prisma ORM)   |
 | Auth         | JWT + bcrypt            |
 | UI Library   | Ant Design / MUI        |
 | Real-time    | Socket.io               |
@@ -134,14 +134,14 @@ The application is containerized using Docker and deployed via Coolify, a self-h
 - Create, edit, delete users
 - Assign roles to users
 - View all tickets across the organization
-- Assign/reassign tickets to any IT staff member
+- Assign/reassign tickets to any support staff member
 - View reports and analytics
 - System configuration
 - Close resolved tickets
 
 > **Note:** Ticket categories and priorities are hardcoded in v1.0. Admin-configurable categories/priorities are planned for v2.0.
 
-### 7.2 IT Staff / Technician
+### 7.2 Support Staff / Technician
 - View tickets assigned to them
 - View unassigned (open) tickets
 - Self-assign unassigned tickets (cannot assign to other staff)
@@ -199,9 +199,9 @@ The application is containerized using Docker and deployed via Coolify, a self-h
 
 ### 8.3 Comments & Notes — P0 (Must Have)
 - Employee can add comments on their tickets
-- IT Staff can add:
+- Support Staff can add:
   - **Public replies** — visible to employee
-  - **Internal notes** — visible only to IT staff and admin
+  - **Internal notes** — visible only to support staff and admin
 - Timestamp and author on every comment
 
 ### 8.4 Attachments — P1 (Should Have)
@@ -217,7 +217,7 @@ The application is containerized using Docker and deployed via Coolify, a self-h
   - Staff workload (tickets per technician)
   - Overdue tickets (based on SLA deadline)
   - Average resolution time
-- **IT Staff Dashboard**:
+- **Support Staff Dashboard**:
   - My assigned tickets
   - Unassigned tickets
   - My performance (resolved count, avg time)
@@ -229,7 +229,7 @@ The application is containerized using Docker and deployed via Coolify, a self-h
 - **In-App Notifications**: Real-time via Socket.io
 - **Email Notifications** (via Nodemailer):
   - Ticket created (to employee + admin)
-  - Ticket assigned (to IT staff)
+  - Ticket assigned (to support staff)
   - Status changed (to employee)
   - New comment added (to relevant parties)
   - Ticket overdue (to assigned staff + admin)
@@ -270,7 +270,7 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 - Rate limiting: 100 requests/15min per IP (general), 5 requests/15min for login
 - Request body size limit (10MB)
 - Input validation on all endpoints via express-validator
-- Parameterized queries via Sequelize ORM (SQL injection prevention)
+- Parameterized queries via Prisma ORM (SQL injection prevention)
 
 **Data Protection:**
 - All passwords hashed — never stored or transmitted in plain text
@@ -326,7 +326,7 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 | priority     | ENUM         | low, medium, high, critical |
 | status       | ENUM         | open, assigned, in_progress, on_hold, resolved, closed |
 | created_by   | UUID (FK)    | Employee who created   |
-| assigned_to  | UUID (FK)    | IT staff assigned      |
+| assigned_to  | UUID (FK)    | support staff assigned      |
 | sla_deadline | TIMESTAMP    | Expected resolution by |
 | resolved_at  | TIMESTAMP    | When resolved          |
 | closed_at    | TIMESTAMP    | When closed            |
@@ -460,7 +460,7 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 1. All users have access to a modern web browser (Chrome, Firefox, or Edge) and a stable intranet or internet connection.
 2. The organization will provide an SMTP-capable mail server or approve a third-party email service for transactional notifications.
 3. A PostgreSQL database server (v14+) will be provisioned before backend development begins.
-4. User onboarding and training will be coordinated by the IT Manager outside the scope of this project.
+4. User onboarding and training will be coordinated by the Manager outside the scope of this project.
 5. Initial user accounts will be created by the Admin via the application; the seed script populates test data for the POC only.
 6. The production server has Docker Engine 24+ and Docker Compose v2 installed, or Coolify v4+ is available as the deployment platform.
 
@@ -477,15 +477,15 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 
 | Dependency          | Type          | Description                                                        | Owner / Provider | Status    |
 | ------------------- | ------------- | ------------------------------------------------------------------ | ---------------- | --------- |
-| PostgreSQL 14+      | Database      | Primary relational data store for all application data             | IT Infrastructure| Pending   |
+| PostgreSQL 14+      | Database      | Primary relational data store for all application data             | Infrastructure| Pending   |
 | Node.js 18+ LTS    | Runtime       | Server-side JavaScript runtime for the Express.js backend          | Development Team | Available |
-| SMTP Server         | Service       | Required for Nodemailer to send transactional email notifications  | IT Infrastructure| Pending   |
-| Hosting / Server    | Infrastructure| Linux server or VM to host the Docker containers                   | IT Infrastructure| Pending   |
-| Domain / DNS        | Infrastructure| Internal domain or IP allocation for application access            | IT Infrastructure| Pending   |
-| SSL Certificate     | Security      | TLS certificate for HTTPS (auto-managed by Coolify/Let's Encrypt) | IT Infrastructure| Pending   |
+| SMTP Server         | Service       | Required for Nodemailer to send transactional email notifications  | Infrastructure| Pending   |
+| Hosting / Server    | Infrastructure| Linux server or VM to host the Docker containers                   | Infrastructure| Pending   |
+| Domain / DNS        | Infrastructure| Internal domain or IP allocation for application access            | Infrastructure| Pending   |
+| SSL Certificate     | Security      | TLS certificate for HTTPS (auto-managed by Coolify/Let's Encrypt) | Infrastructure| Pending   |
 | Docker Engine 24+   | Runtime       | Containerizes all services for consistent dev/staging/prod environments | Development Team | Pending   |
 | Docker Compose v2   | Orchestration | Defines and runs multi-container setup (client, server, postgres)  | Development Team | Pending   |
-| Coolify v4+         | Deployment    | Self-hosted PaaS for automated deployment, SSL, and env management | IT Infrastructure| Pending   |
+| Coolify v4+         | Deployment    | Self-hosted PaaS for automated deployment, SSL, and env management | Infrastructure| Pending   |
 
 ---
 
@@ -514,7 +514,7 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 | JWT             | **JSON Web Token** — A compact, URL-safe token format used for stateless authentication        |
 | CRUD            | **Create, Read, Update, Delete** — The four basic operations performed on database records     |
 | UUID            | **Universally Unique Identifier** — A 128-bit identifier used as primary keys                  |
-| ORM             | **Object-Relational Mapping** — A technique (via Sequelize) that maps database tables to JavaScript objects |
+| ORM             | **Object-Relational Mapping** — A technique (via Prisma) that maps database tables to JavaScript objects |
 | SMTP            | **Simple Mail Transfer Protocol** — The standard protocol used to send transactional email notifications |
 | API             | **Application Programming Interface** — The backend endpoints that the frontend consumes via HTTP |
 | UAT             | **User Acceptance Testing** — The final testing phase where end users validate the system       |
@@ -539,7 +539,7 @@ Based on security patterns from WisRight's existing projects (HRMS-POC, Prompt-M
 
 | Role              | Name | Signature | Date | Status   |
 | ----------------- | ---- | --------- | ---- | -------- |
-| IT Manager        |      |           |      | Pending  |
+| Manager        |      |           |      | Pending  |
 | Project Lead      |      |           |      | Pending  |
 | Lead Developer    |      |           |      | Pending  |
 | QA Lead           |      |           |      | Pending  |
